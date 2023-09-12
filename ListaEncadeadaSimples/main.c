@@ -4,10 +4,10 @@ int main() {
     Lista *lista = lst_cria();  // Cria uma lista encadeada vazia
 
     // Insere elementos na lista
-    lista = lst_insere(lista, 42);
-    lista = lst_insere(lista, 17);
-    lista = lst_insere(lista, 65);
-    lista = lst_insere(lista, 23);
+    lista = lst_insere(lista, 42); //novo->prox linka pro null, por conta da lista criada
+    lista = lst_insere(lista, 17); //novo->prox linka pra lista acima
+    lista = lst_insere(lista, 65); //novo->prox linka pra lista acima
+    lista = lst_insere(lista, 23); //novo->prox linka pra lista acima
 
     printf("Lista apos insercao de elementos:\n");
     lst_imprime(lista);
