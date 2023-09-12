@@ -76,75 +76,75 @@ Lista *lst_retira(Lista *l, int v) //Função para retirar elemento da lista que
 	/* procura elemento na lista, guardando anterior */
 	while (p->info != v)  // enquanto p que aponta para info (variável da struct) for diferent da variável do tipo inteiro (parâmentro) ele vai executar 
 	{
-		if (p == NULL)
+		if (p == NULL) //caso p seja igual a null (nada) e seja verdadeiro ele retorna l, caso não ele continua o código
 			return l; /* n�o achou: retorna lista original */
-		ant = p;
-		p = p->prox;
+		ant = p; //ponteiro ant que recebe o endereço de p, recebe o dado inteiro atual
+		p = p->prox; //p que recebe o endereço de prox
 		/* verifica se achou elemento */
-	}
+	} // OBS.: LEMBRE que ele começa a pegar do último nó (aqui usa a mesma LÓGICA do incremento)
 	/* retira elemento */
-	if (ant == NULL)
+	if (ant == NULL) // Se ant for igual a null (nada) e for verdadeiro ele executa:
 		/* retira elemento do inicio */
-		l = p->prox;
-	else
+		l = p->prox; //ponteiro l recebe o endereço de prox (que vai ser o nó)
+	else //caso não seja verdadeiro executa: 
 		/* retira elemento do meio da lista */
-		ant->prox = p->prox;
-	free(p);
-	return l;
+		ant->prox = p->prox;  //ant que aponta pra prox recebe o endereço de prox
+	free(p); //libera a memória
+	return l; // retorna a lista
 }
 
-void lst_libera(Lista *l)
+void lst_libera(Lista *l) // Função para liberar a memória que tem como parâmetro um ponteiro do tipo lista
 {
-	Lista *p = l;
-	Lista *t;
-	while (p != NULL)
+	Lista *p = l; // Ponteiro do tipo lista que recebe o endereço de l e vai servir como contador
+	Lista *t; // Ponteiro para servir de auxiliar
+	while (p != NULL) // Enquanto p(contador) for diferente de null (nada) executa:
 	{
-		t = p->prox;
-		free(p);
-		p = t;
+		t = p->prox; // Ponteiro que recebe o endereço de prox
+		free(p); // Libera a memória de p
+		p = t; // E p recebe o último endereço que t estava guardando
 	}
 }
 
-Lista *lst_insere_ordenada(Lista *l, int v)
+Lista *lst_insere_ordenada(Lista *l, int v) // Função para ordenar a lista
 {
-	Lista *novo;
-	Lista *ant = NULL;
-	Lista *p = l;
-	while (p != NULL && p->info < v)
+	Lista *novo; // Ponteiro do tipo lista
+	Lista *ant = NULL; // Ponteiro do tipo lista que é inicializada com null (nada)
+	Lista *p = l; // Ponteiro do tipo lista que recebe o endereço de lista para ser o contador
+	while (p != NULL && p->info < v) // Enquanto p for diferente de null (nada) e o dado de info seja menor do numero inteiro v do parâmetro executa: 
 	{
-		ant = p;
-		p = p->prox;
+		ant = p; // ant recebe o endereço de p (contador) (nó anteiror)
+		p = p->prox; // p recebe o endereço de prox (próximo nó)
 	}
-	novo = (Lista *)malloc(sizeof(Lista));
-	novo->info = v;
-	if (ant == NULL)
+	novo = (Lista *)malloc(sizeof(Lista)); // Cria um vetor dinâmico
+	novo->info = v; // novo que aponta para info recebe o valor inteiro v (do parâmetro)
+	if (ant == NULL) // Se ant for igual a null (nada) executa:
 	{
-		novo->prox = l;
-		l = novo;
+		novo->prox = l; // prox armazena o endereço de l 
+		l = novo; // E l recebe o endereço da variável novo
 	}
-	else
+	else // caso não seja verdadeiro ele executa: 
 	{
-		novo->prox = ant->prox;
-		ant->prox = novo;
+		novo->prox = ant->prox; // prox recebe o endereço de ant prox
+		ant->prox = novo; // E ant prox recebe o endereço da variável novo
 	}
-	return l;
+	return l; // Retorna a lista
 }
 
-Lista *lst_ler_arquivo(char *nome_arquivo)
+Lista *lst_ler_arquivo(char *nome_arquivo) // Função para ler a lista que tem como parâmetro um vetor de string
 {
-	FILE *arquivo;
-	int valor;
-	Lista *l = lst_cria();
-	arquivo = fopen(nome_arquivo, "r");
-	if (arquivo == NULL)
+	FILE *arquivo; // Cria o ponteiro do tipo arquivo
+	int valor; // Cria a variável do tipo inteiro
+	Lista *l = lst_cria(); // Ponteiro do tipo lista recebe a função para criar a lista
+	arquivo = fopen(nome_arquivo, "r"); // Abre o arquivo no modo de leitura
+	if (arquivo == NULL) // Se o arquivo for igual a null (nada) executa:
 	{
-		printf("Erro ao abrir o arquivo!\n");
-		exit(1);
+		printf("Erro ao abrir o arquivo!\n"); // Mensagem de erro 
+		exit(1); // Encerra o programa
 	}
-	while (fscanf(arquivo, "%d", &valor) != EOF)
+	while (fscanf(arquivo, "%d", &valor) != EOF) // Enquanto a leitura no arquivo para inteiro e armazenar na váriavel valor for diferente do final do arquivo executa:
 	{
-		l = lst_insere(l, valor);
+		l = lst_insere(l, valor); // l recebe a função para inserir com os parâmetro do ponteiro l (lista) e o valor (int)
 	}
-	fclose(arquivo);
-	return l;
+	fclose(arquivo); // Fecha o arquivo
+	return l; // Retorna a lista
 }
