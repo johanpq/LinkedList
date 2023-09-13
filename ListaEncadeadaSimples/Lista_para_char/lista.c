@@ -9,7 +9,7 @@ Neste arquivo, temos a implementação de uma lista encadeada simples de inteiro
 
 struct lista  
 {
-	int nome[50];
+	char nome[50];
 	struct lista *prox;
 };
 
@@ -51,7 +51,7 @@ void lst_imprime(Lista *l) //Função para imprimir na tela que tem como parâme
 	for (p = l; p != NULL; p = p->prox) //p que recebe o endereço de l; p que vai fazer o lopp até encontrar null(nada), p que recebe o endereço do ponteiro prox que p aponta
 	{ //ele imprimi ao contrário, pois ele pega o último nó (a última lista) e vai precisar desse incremento para achar os outros nós até que ele ache null(nada) que no caso
 	  //é o inicio da lista (momento que foi criado)
-		printf("\tInfo = %d \n", p->nome); //mostra os numeros armazenados na variável info
+		printf("\tInfo = %s \n", p->nome); //mostra os numeros armazenados na variável info
 	}
 }
 
@@ -69,7 +69,7 @@ Lista *lst_busca(char elemento[50], Lista *l) //Função para buscar na lista qu
 	return NULL;
 }
 
-Lista *lst_retira(Lista *l, int v) //Função para retirar elemento da lista que tem como parâmetros um ponteiro do tipo lista e uma variável do tipo inteiro
+Lista *lst_retira(Lista *l, char v[50]) //Função para retirar elemento da lista que tem como parâmetros um ponteiro do tipo lista e uma variável do tipo inteiro
 {
 	Lista *ant = NULL; /* ponteiro para elemento anterior */   // Ponteiro do tipo lista que recebe null (nada) que vai servir para o elemento anterior
 	Lista *p = l;	   /* ponteiro para percorrer a lista*/    // Ponteiro do tipo lista que recebe o endereço do ponteiro l (parâmetro) que vai servir como contador
@@ -133,7 +133,7 @@ Lista *lst_insere_ordenada(Lista *l, char v[50]) // Função para ordenar a list
 Lista *lst_ler_arquivo(char *nome_arquivo) // Função para ler a lista que tem como parâmetro um vetor de string
 {
 	FILE *arquivo; // Cria o ponteiro do tipo arquivo
-	int valor; // Cria a variável do tipo inteiro
+	char valor[50]; // Cria a variável do tipo inteiro
 	Lista *l = lst_cria(); // Ponteiro do tipo lista recebe a função para criar a lista
 	arquivo = fopen(nome_arquivo, "r"); // Abre o arquivo no modo de leitura
 	if (arquivo == NULL) // Se o arquivo for igual a null (nada) executa:
@@ -141,7 +141,7 @@ Lista *lst_ler_arquivo(char *nome_arquivo) // Função para ler a lista que tem 
 		printf("Erro ao abrir o arquivo!\n"); // Mensagem de erro 
 		exit(1); // Encerra o programa
 	}
-	while (fscanf(arquivo, "%s", &valor) != EOF) // Enquanto a leitura no arquivo para inteiro e armazenar na váriavel valor for diferente do final do arquivo executa:
+	while (fscanf(arquivo, "%s", valor) != EOF) // Enquanto a leitura no arquivo para inteiro e armazenar na váriavel valor for diferente do final do arquivo executa:
 	{
 		l = lst_insere(l, valor); // l recebe a função para inserir com os parâmetro do ponteiro l (lista) e o valor (int)
 	}

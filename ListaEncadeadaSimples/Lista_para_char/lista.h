@@ -20,7 +20,7 @@ void lst_imprime(Lista *l);
 Lista *lst_busca(char elemento[50], Lista *l);
 
 // função que retira um elemento da lista
-Lista *lst_retira(Lista *l, int v);
+Lista *lst_retira(Lista *l, char v[50]);
 
 // função que libera a memória alocada para a lista
 void lst_libera(Lista *l);

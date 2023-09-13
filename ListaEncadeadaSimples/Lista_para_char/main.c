@@ -24,7 +24,7 @@ int main() {
     // Busca um elemento na lista
     Lista *resultadoBusca = lst_busca("Jose", lista);
     if (resultadoBusca != NULL) {
-        printf("Elemento %d encontrado na lista.\n", resultadoBusca->nome);
+        printf("Elemento %s encontrado na lista.\n", resultadoBusca->nome);
     } else {
         printf("Elemento não encontrado na lista.\n");
     }
@@ -32,14 +32,14 @@ int main() {
 
     // Remove um elemento da lista
     lista = lst_retira(lista, "Johan");
-    printf("Lista apos a remocao do elemento %d:\n", 17);
+    printf("Lista apos a remocao do elemento %s:\n", 17);
     lst_imprime(lista);
 	printf("\n");
 
     // Insere um elemento de forma ordenada na lista
-    char elementoOrdenado = "Pedro";
+    char elementoOrdenado[50] = "Pedro";
     lista = lst_insere_ordenada(lista, elementoOrdenado);
-    printf("Lista apos a insercao ordenada do elemento %d:\n", elementoOrdenado);
+    printf("Lista apos a insercao ordenada do elemento %s:\n", elementoOrdenado);
     lst_imprime(lista);
 	printf("\n");
 
